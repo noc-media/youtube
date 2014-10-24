@@ -229,12 +229,12 @@ class Download extends AbstractYoutube
                 throw new ItagNotFoundException("Itag Not Found ({$itag})");
             }
             //$location = /var/www/uploads/$fileName%s.mp4
-            $location = sprintf($location, $itag);
-            $target = fopen($location, "a");
+            $locationFormatted = sprintf($location, $itag);
+            $target = fopen($locationFormatted, "a");
 
             $ch = curl_init($formatItag->url);
             if (!empty($chunkSize)) {
-                $start = filesize($location);
+                $start = filesize($locationFormatted);
                 $end = $start + $chunkSize;
                 curl_setopt($ch, CURLOPT_RANGE, "{$start}-{$end}");
 
