@@ -238,15 +238,16 @@ class Download extends AbstractYoutube
                 $end = $start + $chunkSize;
                 curl_setopt($ch, CURLOPT_RANGE, "{$start}-{$end}");
 
-                $progress = ($end / $formatItag->clen) * 100;
-                $response[$itag]['progress'] = $progress > 100 ? 100 : $progress;
+                $response[$itag]['progress'] = ($end / $formatItag->clen) * 100;
             } else {
                 $response[$itag]['progress'] = 100;
             }
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FILE, $target);
-            curl_exec($ch);
-            curl_close($ch);
+            if ($response[$itag]['progress'] <= 100) {
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_FILE, $target);
+                curl_exec($ch);
+                curl_close($ch);
+            }
         }
         return $response;
     }
