@@ -20,8 +20,7 @@ abstract class AbstractYoutube {
     public function getThumbnailUrl()
     {
         if (!$this->thumbnailUrl) {
-            $configs = $this->getServiceLocator()->get('Config');
-            $this->thumbnailUrl = $configs['thumbnailUrl'];
+            $this->thumbnailUrl = "http://i1.ytimg.com/vi/";
         }
         return $this->thumbnailUrl;
     }
@@ -40,8 +39,7 @@ abstract class AbstractYoutube {
     public function getVideoInfoUrl()
     {
         if (!$this->videoInfoUrl) {
-            $configs = $this->getServiceLocator()->get('Config');
-            $this->videoInfoUrl = $configs['videoInfoUrl'];
+            $this->videoInfoUrl = "http://www.youtube.com/get_video_info?el=detailpage&ps=default&eurl=&gl=US&hl=en&sts=15888&video_id=";
         }
         return $this->videoInfoUrl;
     }
@@ -60,8 +58,7 @@ abstract class AbstractYoutube {
     public function getWatchUrl()
     {
         if (!$this->watchUrl) {
-            $configs = $this->getServiceLocator()->get('Config');
-            $this->watchUrl = $configs['watchUrl'];
+            $this->watchUrl = "http://www.youtube.com/watch?v=";
         }
         return $this->watchUrl;
     }

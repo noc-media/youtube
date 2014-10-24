@@ -13,10 +13,8 @@ use Youtube\Downloader\Exception\ItagNotFoundException;
 use Youtube\Downloader\Exception\ItagsIsRequiredException;
 use Youtube\Downloader\Exception\LiveEventIsOverException;
 use Youtube\Downloader\Exception\VideoIdOrVideoUrlRequiredException;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
-class Download extends AbstractYoutube implements ServiceLocatorAwareInterface
+class Download extends AbstractYoutube
 {
 
     protected $serviceLocator;
@@ -24,22 +22,6 @@ class Download extends AbstractYoutube implements ServiceLocatorAwareInterface
     protected $videoUrl;
     protected $videoInfo;
     protected $itags;
-
-    /**
-     * @return mixed
-     */
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
-
-    /**
-     * @param mixed $serviceLocator
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->serviceLocator = $serviceLocator;
-    }
 
     /**
      * @return mixed
