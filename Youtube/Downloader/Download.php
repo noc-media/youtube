@@ -205,13 +205,14 @@ class Download extends AbstractYoutube
         return $result;
     }
 
-    public function download($location, $byte = 0)
+    public function download($location, $chunkSize = 0)
     {
         if (empty($this->getItags())) {
             throw new ItagsIsRequiredException("Minimum 1 itag required.");
         }
 
         $videoInfo = $this->getVideoInfo();
+        $response = array();
         foreach ($this->getItags() as $itag) {
             $formatItag = null;
             foreach ($videoInfo['full_formats'] as $format) {
@@ -232,15 +233,20 @@ class Download extends AbstractYoutube
             $target = fopen($location, "a");
 
             $ch = curl_init($formatItag->url);
-            if (!empty($byte)) {
+            if (!empty($chunkSize)) {
                 $start = filesize($location);
-                $end = $start + $byte;
+                $end = $start + $chunkSize;
                 curl_setopt($ch, CURLOPT_RANGE, "{$start}-{$end}");
+
+                $response[$itag]['progress'] = ($end / $formatItag->clen) * 100;
+            } else {
+                $response[$itag]['progress'] = 100;
             }
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_FILE, $target);
             curl_exec($ch);
             curl_close($ch);
         }
+        return $response;
     }
 }
