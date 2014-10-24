@@ -4,7 +4,6 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
-        "rmccue/requests": ">=1.0",
         "dflydev/apache-mime-types": "1.0.*@dev"
     },
     "autoload": {
