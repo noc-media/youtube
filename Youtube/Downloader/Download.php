@@ -247,6 +247,7 @@ class Download extends AbstractYoutube
                 curl_setopt($ch, CURLOPT_FILE, $target);
                 curl_exec($ch);
                 curl_close($ch);
+                fclose( $target );
             } else {
                 $response[$itag]['progress'] = 100;
             }
