@@ -235,7 +235,6 @@ class Download extends AbstractYoutube
             if (!empty($byte)) {
                 $start = filesize($location);
                 $end = $start + $byte;
-                echo "{$start}-{$end}";
                 curl_setopt($ch, CURLOPT_RANGE, "{$start}-{$end}");
             }
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
