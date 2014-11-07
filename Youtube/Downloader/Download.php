@@ -237,6 +237,10 @@ class Download extends AbstractYoutube
             $target = fopen($locationFormatted, "a");
 
             $ch = curl_init($formatItag->url);
+            curl_setopt($ch, CURLOPT_REFERER, $formatItag->url);
+            curl_setopt($ch, CURLOPT_HEADER, array(
+                "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36"
+            ));
             if (!empty($chunkSize)) {
                 $start = filesize($locationFormatted);
                 $end = $start + $chunkSize;
