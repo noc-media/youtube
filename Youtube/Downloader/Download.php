@@ -228,6 +228,10 @@ class Download extends AbstractYoutube
             if (empty($formatItag)) {
                 throw new ItagNotFoundException("Itag Not Found ({$itag})");
             }
+
+            $pathInfo = pathinfo($location);
+            mkdir($pathInfo['dirname'], 777, true);
+
             //$location = /var/www/uploads/$fileName%s.mp4
             $locationFormatted = sprintf($location, $itag);
             $target = fopen($locationFormatted, "a");
