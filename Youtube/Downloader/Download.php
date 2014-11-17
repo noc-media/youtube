@@ -238,7 +238,7 @@ class Download extends AbstractYoutube
 
             $ch = curl_init($formatItag->url);
             curl_setopt($ch, CURLOPT_REFERER, $formatItag->url);
-            curl_setopt($ch, CURLOPT_HEADER, array(
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36",
                 "Connection: keep-alive",
                 "Keep-Alive: 115",
@@ -256,12 +256,11 @@ class Download extends AbstractYoutube
                 $response[$itag]['progress'] = 100;
             }
             if ($response[$itag]['progress'] <= 100) {
-                curl_setopt($ch, CURLOPT_CAPATH, "/etc/ssl/certs/");
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36');
+                curl_setopt($ch, CURLOPT_HEADER, false);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_VERBOSE, true);
                 curl_setopt($ch, CURLOPT_FILE, $target);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
                 curl_exec($ch);
                 curl_close($ch);
                 fclose( $target );
