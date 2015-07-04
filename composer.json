@@ -1,5 +1,5 @@
 {
-    "name": "noc-med/youtube",
+    "name": "nocvp/youtube",
     "type": "library",
     "minimum-stability": "stable",
     "require": {
